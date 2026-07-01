@@ -40,7 +40,26 @@ class Controller:
         sizeComConn=self._model.getInfoCompConnessa(idOggetto)
         self._view.txt_result.controls.clear()
         self._view.txt_result.controls.append(ft.Text(f"La componente connessa contenente l'oggetto con  id {idOggetto} è composta di{sizeComConn} NODI", color="verde"))
+        #self._view.update_page()
+
+        lunValues=list(range(2,sizeComConn))
+
+       # for v in lunValues:
+         #   self._ddLun.options.append(ft.dropdown.Option(v))
+
+        #POTREI USARE IL METODO MAP AL POSTO DEL CICLO
+        #lambda- funz che voglio usare  e poi buttare subito
+        lunValuesDD=list(map(lambda x:ft.dropdown.Option(x),lunValues))
+
+        self._view._ddLun.options=lunValuesDD
+
+        self._view._ddLun.disabled = False
+        self._view._btnCerca.disabled = False
         self._view.update_page()
+
+    def handleCerca(self,e):
+        pass
+
 
 
 
