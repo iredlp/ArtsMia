@@ -58,7 +58,26 @@ class Controller:
         self._view.update_page()
 
     def handleCerca(self,e):
-        pass
+        source=self._model.getNodelFromId(int(self._view._txtIdOggetto.value)) #lo recuper dalla view
+
+        lun=self._view._ddLun.value
+
+        if lun is None:
+            self._view.txt_result.controls.clear()
+            self._view.txt_result.controls.append(ft.Text("Attenzione, selezionare un valore"
+                                                          " di lunghezza fra le scelte proposte", color="red"))
+            self._view.update_page()
+            return
+        lunInt= int(lun)
+
+        path, cost=self._model.getOptPath(source, lunInt)
+        self._view.txt_result.controls.clear()
+        self._view.txt_result.controls.append(ft.Text(f"Ho trovato un cammino che parte da {source} che ha un peso totale pari a {cost}"))
+        self._view.txt_result.controls.append(ft.Text(f"Di seguito i nodi che compongono qeato cammino:", color="green"))
+        for p in path:
+            self._view.txt_result.controls.append(ft.Text(p))
+        self._view.update_page()
+
 
 
 
